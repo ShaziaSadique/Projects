@@ -24,7 +24,6 @@ a) MD5
 b) SHA-256
 c) SHA-512crypt/yescrypt
 d) bcrypt
-e) Salted SHA-512
 
 # Tools and Equipments
 - Kali Linux
@@ -48,15 +47,6 @@ grep -E '^user[1-5]:' all_users.txt > singlefile.txt
 ### Step 2:
 Run John the Ripper against all hash types
 
-**MD5**
-```bash
-john --single singlefile.txt
-```
-**SHA-256**
-
-```bash
-john --single --format=sha256crypt singlecrack_test.txt
-```
 
 **SHA-512crypt / yescrypt**
 
@@ -64,23 +54,75 @@ john --single --format=sha256crypt singlecrack_test.txt
 john --single --format=crypt singlecrack_test.txt
 ```
 
-**bcrypt**
+**MD5**
+Generated an MD5-crypt hash for each test user's known password using openssl, since Kali's passwd command only produces yescrypt hashes for real system accounts.
 
 ```bash
-john --single --format=bcrypt singlecrack_test.txt
+echo "user1:$(openssl passwd -1 -salt saltmd5 user1):1007:1008::/home/user1:/bin/sh" > hash-md5.txt
+echo "user2:$(openssl passwd -1 -salt saltmd5 password):1008:1009::/home/user2:/bin/sh" >> hash-md5.txt
+echo "user3:$(openssl passwd -1 -salt saltmd5 'Password1!'):1004:1005::/home/user3:/bin/sh" >> hash-md5.txt
+echo "user4:$(openssl passwd -1 -salt saltmd5 xk4T9):1005:1006::/home/user4:/bin/sh" >> hash-md5.txt
+echo "user5:$(openssl passwd -1 -salt saltmd5 Winter2025):1006:1007::/home/user5:/bin/sh" >> hash-md5.txt
+john --single --format=md5crypt hash-md5.txt
+```
+**SHA-256**
+```
+echo "user1:$(openssl passwd -5 -salt saltsha256 user1):1007:1008::/home/user1:/bin/sh" > hash-sha256.txt
+echo "user2:$(openssl passwd -5 -salt saltsha256 password):1008:1009::/home/user2:/bin/sh" >> hash-sha256.txt
+echo "user3:$(openssl passwd -5 -salt saltsha256 'Password1!'):1004:1005::/home/user3:/bin/sh" >> hash-sha256.txt
+echo "user4:$(openssl passwd -5 -salt saltsha256 xk4T9):1005:1006::/home/user4:/bin/sh" >> hash-sha256.txt
+echo "user5:$(openssl passwd -5 -salt saltsha256 Winter2025):1006:1007::/home/user5:/bin/sh" >> hash-sha256.txt
+john --single --format=sha256crypt hash-sha256.txt
+```
+**Bcrypt**
+Check if htpasswd is installed
+```
+which htpasswd
+```
+Generate bcrypt hashes for each password
+```
+echo "user1:$(htpasswd -nbB user1 user1 | cut -d: -f2):1007:1008::/home/user1:/bin/sh" > hash-bcrypt.txt
+echo "user2:$(htpasswd -nbB user2 password | cut -d: -f2):1008:1009::/home/user2:/bin/sh" >> hash-bcrypt.txt
+echo "user3:$(htpasswd -nbB user3 'Password1!' | cut -d: -f2):1004:1005::/home/user3:/bin/sh" >> hash-bcrypt.txt
+echo "user4:$(htpasswd -nbB user4 xk4T9 | cut -d: -f2):1005:1006::/home/user4:/bin/sh" >> hash-bcrypt.txt
+echo "user5:$(htpasswd -nbB user5 Winter2025 | cut -d: -f2):1006:1007::/home/user5:/bin/sh" >> hash-bcrypt.txt
+```
+```
+john --single --format=bcrypt hash-bcrypt.txt
 ```
 
+## Wordlist Mode
+Executed John the Ripper using Wordlist mode, which compares each hash against passwords from a precompiled wordlist file, making it effective against passwords that are common words or previously leaked credentials.
 
+**SHA-512crypt / yescrypt**
+```bash
+john --wordlist=file.txt --format=crypt singlecrack_test.txt
+```
+Result: [paste john output here]
 
+**MD5**
+```bash
+john --wordlist=file.txt --format=md5crypt hash-md5.txt
+```
+Result: [paste john output here]
 
+**SHA-256**
+```bash
+john --wordlist=file.txt --format=sha256crypt hash-sha256.txt
+```
+Result: [paste john output here]
 
+**Bcrypt**
+```bash
+john --wordlist=file.txt --format=bcrypt hash-bcrypt.txt
+```
+Result: [paste john output here]
 
-
-
-
-
-
-
+**Salted SHA-512**
+```bash
+john --wordlist=file.txt --format=sha512crypt hash-sha512.txt
+```
+Result: [paste john output here]
 
 
 
