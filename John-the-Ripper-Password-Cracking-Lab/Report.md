@@ -53,6 +53,8 @@ Run John the Ripper against all hash types
 ```bash
 john --single --format=crypt singlecrack_test.txt
 ```
+Result:
+![(screenshots/single_crack.png)]
 
 **MD5**
 Generated an MD5-crypt hash for each test user's known password using openssl, since Kali's passwd command only produces yescrypt hashes for real system accounts.
@@ -63,8 +65,11 @@ echo "user2:$(openssl passwd -1 -salt saltmd5 password):1008:1009::/home/user2:/
 echo "user3:$(openssl passwd -1 -salt saltmd5 'Password1!'):1004:1005::/home/user3:/bin/sh" >> hash-md5.txt
 echo "user4:$(openssl passwd -1 -salt saltmd5 xk4T9):1005:1006::/home/user4:/bin/sh" >> hash-md5.txt
 echo "user5:$(openssl passwd -1 -salt saltmd5 Winter2025):1006:1007::/home/user5:/bin/sh" >> hash-md5.txt
+```
+```bash
 john --single --format=md5crypt hash-md5.txt
 ```
+
 **SHA-256**
 ```
 echo "user1:$(openssl passwd -5 -salt saltsha256 user1):1007:1008::/home/user1:/bin/sh" > hash-sha256.txt
