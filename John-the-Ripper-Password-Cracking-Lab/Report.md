@@ -117,25 +117,21 @@ john --wordlist=file.txt --format=crypt singlecrack_test.txt
 ```bash
 john --wordlist=file.txt --format=md5crypt hash-md5.txt
 ```
-Result: [paste john output here]
+![Result](Screenshots/wordlist_md5.png)
 
 **SHA-256**
 ```bash
 john --wordlist=file.txt --format=sha256crypt hash-sha256.txt
 ```
-Result: [paste john output here]
+![Result](Screenshots/wordlist_256.png)
 
 **Bcrypt**
 ```bash
 john --wordlist=file.txt --format=bcrypt hash-bcrypt.txt
 ```
-Result: [paste john output here]
+![Result](Screenshots/wordlist_bcrypt.png)
 
-**Salted SHA-512**
-```bash
-john --wordlist=file.txt --format=sha512crypt hash-sha512.txt
-```
-Result: [paste john output here]
+
 
 
 
