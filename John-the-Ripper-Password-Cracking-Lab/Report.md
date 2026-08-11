@@ -53,7 +53,7 @@ Perform password cracking
 ```bash
 john --single --format=crypt singlecrack_test.txt
 ```
-![Result](screenshots/single_crypt.png)
+![Result](Screenshots/single_crypt.png)
 
 **MD5**
 Generated an MD5-crypt hash for each test user's known password using openssl, since Kali's passwd command only produces yescrypt hashes for real system accounts.
@@ -69,7 +69,7 @@ Perform password cracking
 ```bash
 john --single --format=md5crypt hash-md5.txt
 ```
-![Result](screenshots/single_md5.png)
+![Result](Screenshots/single_md5.png)
 
 **SHA-256**
 ```
@@ -83,7 +83,7 @@ Perform password cracking
 ```bash
 john --single --format=sha256crypt hash-sha256.txt
 ```
-![Result](screenshots/single_256.png)
+![Result](Screenshots/single_256.png)
 
 **Bcrypt**
 Check if htpasswd is installed
@@ -102,7 +102,7 @@ Perform password cracking
 ```
 john --single --format=bcrypt hash-bcrypt.txt
 ```
-![Result](screenshots/single_bcrypt.png)
+![Result](Screenshots/single_bcrypt.png)
 
 ## Wordlist Mode
 Executed John the Ripper using Wordlist mode, which compares each hash against passwords from a precompiled wordlist file, making it effective against passwords that are common words or previously leaked credentials.
