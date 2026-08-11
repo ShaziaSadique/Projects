@@ -145,7 +145,7 @@ john --wordlist=file.txt --rules --format=crypt singlecrack_test.txt
 ```bash
 john --wordlist=file.txt --rules --format=md5crypt hash-md5.txt
 ```
-![Result](Screenshots/rules_md5.png)
+![Result](Screenshots/rules_Md5.png)
 
 **SHA-256**
 ```bash
