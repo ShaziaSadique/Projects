@@ -132,6 +132,32 @@ john --wordlist=file.txt --format=bcrypt hash-bcrypt.txt
 ![Result](Screenshots/wordlist_bcrypt.png)
 
 
+## Rules-Based Mode
+Executed John the Ripper using Rules-Based mode, which applies transformation rules (such as adding numbers, capitalizing letters, or appending symbols) to wordlist entries, allowing it to crack passwords that are slight variations of common words.
+
+**SHA-512crypt / yescrypt**
+```bash
+john --wordlist=file.txt --rules --format=crypt singlecrack_test.txt
+```
+![Result](Screenshots/rules_crypt.png)
+
+**MD5**
+```bash
+john --wordlist=file.txt --rules --format=md5crypt hash-md5.txt
+```
+![Result](Screenshots/rules_md5.png)
+
+**SHA-256**
+```bash
+john --wordlist=file.txt --rules --format=sha256crypt hash-sha256.txt
+```
+![Result](Screenshots/rules_256.png)
+
+**Bcrypt**
+```bash
+john --wordlist=file.txt --rules --format=bcrypt hash-bcrypt.txt
+```
+![Result](Screenshots/rules_bcrypt.png)
 
 
 
