@@ -111,7 +111,7 @@ Executed John the Ripper using Wordlist mode, which compares each hash against p
 ```bash
 john --wordlist=file.txt --format=crypt singlecrack_test.txt
 ```
-![Result](Screenshots/wordlist_crypt.jpg)
+![Result](Screenshots/wordlist_crypt.jpeg)
 
 **MD5**
 ```bash
