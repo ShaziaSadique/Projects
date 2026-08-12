@@ -34,8 +34,6 @@ d) bcrypt
 # Setup
 Created test users and generated password hashes for each of the hashes above. Each attack mode was tested against all hash types.
 
-## Single Crack Mode
-Executed John the Ripper using this mode, which guesses password based on the username and GECOS field data.
 
 ### Step 1: 
 Combine `/etc/passwd` and `/etc/shadow` into a single file using `unshadow`.
@@ -44,9 +42,43 @@ Combine `/etc/passwd` and `/etc/shadow` into a single file using `unshadow`.
 sudo unshadow /etc/passwd /etc/shadow > all_users.txt
 grep -E '^user[1-5]:' all_users.txt > singlefile.txt
 ```
-### Step 2:
+### step 2:
+Convert all the test passwords to its hash type accordingly.
+## MD5
+```bash
+echo "user1:$(openssl passwd -1 -salt saltmd5 user1):1007:1008::/home/user1:/bin/sh" > hash-md5.txt
+echo "user2:$(openssl passwd -1 -salt saltmd5 password):1008:1009::/home/user2:/bin/sh" >> hash-md5.txt
+echo "user3:$(openssl passwd -1 -salt saltmd5 'Password1!'):1004:1005::/home/user3:/bin/sh" >> hash-md5.txt
+echo "user4:$(openssl passwd -1 -salt saltmd5 xk4T9):1005:1006::/home/user4:/bin/sh" >> hash-md5.txt
+echo "user5:$(openssl passwd -1 -salt saltmd5 Winter2025):1006:1007::/home/user5:/bin/sh" >> hash-md5.txt
+```
+## sha-256
+```bash
+echo "user1:$(openssl passwd -5 -salt saltsha256 user1):1007:1008::/home/user1:/bin/sh" > hash-sha256.txt
+echo "user2:$(openssl passwd -5 -salt saltsha256 password):1008:1009::/home/user2:/bin/sh" >> hash-sha256.txt
+echo "user3:$(openssl passwd -5 -salt saltsha256 'Password1!'):1004:1005::/home/user3:/bin/sh" >> hash-sha256.txt
+echo "user4:$(openssl passwd -5 -salt saltsha256 xk4T9):1005:1006::/home/user4:/bin/sh" >> hash-sha256.txt
+echo "user5:$(openssl passwd -5 -salt saltsha256 Winter2025):1006:1007::/home/user5:/bin/sh" >> hash-sha256.txt
+```
+## Bcrypt
+Check if htpasswd is installed
+```
+which htpasswd
+```
+Generate bcrypt hashes for each password
+```bash
+echo "user1:$(htpasswd -nbB user1 user1 | cut -d: -f2):1007:1008::/home/user1:/bin/sh" > hash-bcrypt.txt
+echo "user2:$(htpasswd -nbB user2 password | cut -d: -f2):1008:1009::/home/user2:/bin/sh" >> hash-bcrypt.txt
+echo "user3:$(htpasswd -nbB user3 'Password1!' | cut -d: -f2):1004:1005::/home/user3:/bin/sh" >> hash-bcrypt.txt
+echo "user4:$(htpasswd -nbB user4 xk4T9 | cut -d: -f2):1005:1006::/home/user4:/bin/sh" >> hash-bcrypt.txt
+echo "user5:$(htpasswd -nbB user5 Winter2025 | cut -d: -f2):1006:1007::/home/user5:/bin/sh" >> hash-bcrypt.txt
+```
+
+### Step 3:
 Run John the Ripper against all hash types
 
+## Single Crack Mode
+Executed John the Ripper using this mode, which guesses password based on the username and GECOS field data.
 
 **SHA-512crypt / yescrypt**
 Perform password cracking
@@ -59,46 +91,18 @@ john --single --format=crypt singlecrack_test.txt
 Generated an MD5-crypt hash for each test user's known password using openssl, since Kali's passwd command only produces yescrypt hashes for real system accounts.
 
 ```bash
-echo "user1:$(openssl passwd -1 -salt saltmd5 user1):1007:1008::/home/user1:/bin/sh" > hash-md5.txt
-echo "user2:$(openssl passwd -1 -salt saltmd5 password):1008:1009::/home/user2:/bin/sh" >> hash-md5.txt
-echo "user3:$(openssl passwd -1 -salt saltmd5 'Password1!'):1004:1005::/home/user3:/bin/sh" >> hash-md5.txt
-echo "user4:$(openssl passwd -1 -salt saltmd5 xk4T9):1005:1006::/home/user4:/bin/sh" >> hash-md5.txt
-echo "user5:$(openssl passwd -1 -salt saltmd5 Winter2025):1006:1007::/home/user5:/bin/sh" >> hash-md5.txt
-```
-Perform password cracking
-```bash
 john --single --format=md5crypt hash-md5.txt
 ```
 ![Result](Screenshots/single_md5.png)
 
 **SHA-256**
-```
-echo "user1:$(openssl passwd -5 -salt saltsha256 user1):1007:1008::/home/user1:/bin/sh" > hash-sha256.txt
-echo "user2:$(openssl passwd -5 -salt saltsha256 password):1008:1009::/home/user2:/bin/sh" >> hash-sha256.txt
-echo "user3:$(openssl passwd -5 -salt saltsha256 'Password1!'):1004:1005::/home/user3:/bin/sh" >> hash-sha256.txt
-echo "user4:$(openssl passwd -5 -salt saltsha256 xk4T9):1005:1006::/home/user4:/bin/sh" >> hash-sha256.txt
-echo "user5:$(openssl passwd -5 -salt saltsha256 Winter2025):1006:1007::/home/user5:/bin/sh" >> hash-sha256.txt
-```
-Perform password cracking
+
 ```bash
 john --single --format=sha256crypt hash-sha256.txt
 ```
 ![Result](Screenshots/single_256.png)
 
 **Bcrypt**
-Check if htpasswd is installed
-```
-which htpasswd
-```
-Generate bcrypt hashes for each password
-```
-echo "user1:$(htpasswd -nbB user1 user1 | cut -d: -f2):1007:1008::/home/user1:/bin/sh" > hash-bcrypt.txt
-echo "user2:$(htpasswd -nbB user2 password | cut -d: -f2):1008:1009::/home/user2:/bin/sh" >> hash-bcrypt.txt
-echo "user3:$(htpasswd -nbB user3 'Password1!' | cut -d: -f2):1004:1005::/home/user3:/bin/sh" >> hash-bcrypt.txt
-echo "user4:$(htpasswd -nbB user4 xk4T9 | cut -d: -f2):1005:1006::/home/user4:/bin/sh" >> hash-bcrypt.txt
-echo "user5:$(htpasswd -nbB user5 Winter2025 | cut -d: -f2):1006:1007::/home/user5:/bin/sh" >> hash-bcrypt.txt
-```
-Perform password cracking
 ```
 john --single --format=bcrypt hash-bcrypt.txt
 ```
@@ -160,5 +164,35 @@ john --wordlist=file.txt --rules --format=bcrypt hash-bcrypt.txt
 ![Result](Screenshots/rules_bcrypt.png)
 
 
+## Incremental Mode
+Executed John the Ripper using Incremental mode, a brute-force attack that tries all possible character combinations. It is the most thorough but slowest mode, and its feasibility depends heavily on the strength of the hashing algorithm used.
 
+**SHA-512crypt / yescrypt**
+```bash
+john --incremental --format=crypt singlecrack_test.txt
+```
+Result: [paste john output here]
 
+**MD5**
+```bash
+john --incremental --format=md5crypt hash-md5.txt
+```
+Result: [paste john output here]
+
+**SHA-256**
+```bash
+john --incremental --format=sha256crypt hash-sha256.txt
+```
+Result: [paste john output here]
+
+**Bcrypt**
+```bash
+john --incremental --format=bcrypt hash-bcrypt.txt
+```
+Result: [paste john output here]
+
+**Salted SHA-512**
+```bash
+john --incremental --format=sha512crypt hash-sha512.txt
+```
+Result: [paste john output here]
