@@ -191,8 +191,3 @@ john --incremental --format=bcrypt hash-bcrypt.txt
 ```
 Result: [paste john output here]
 
-**Salted SHA-512**
-```bash
-john --incremental --format=sha512crypt hash-sha512.txt
-```
-Result: [paste john output here]
