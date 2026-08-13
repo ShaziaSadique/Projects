@@ -42,7 +42,7 @@ Combine `/etc/passwd` and `/etc/shadow` into a single file using `unshadow`.
 sudo unshadow /etc/passwd /etc/shadow > all_users.txt
 grep -E '^user[1-5]:' all_users.txt > singlefile.txt
 ```
-### step 2:
+### Step 2:
 Convert all the test passwords to its hash type accordingly.
 ## MD5
 ```bash
@@ -54,7 +54,7 @@ echo "user5:$(openssl passwd -1 -salt saltmd5 Winter2025):1006:1007::/home/user5
 ```
 ![Result](Screenshots/hash-md5.png)
 
-## sha-256
+## Sha-256
 ```bash
 echo "user1:$(openssl passwd -5 -salt saltsha256 user1):1007:1008::/home/user1:/bin/sh" > hash-sha256.txt
 echo "user2:$(openssl passwd -5 -salt saltsha256 password):1008:1009::/home/user2:/bin/sh" >> hash-sha256.txt
@@ -62,7 +62,7 @@ echo "user3:$(openssl passwd -5 -salt saltsha256 'Password1!'):1004:1005::/home/
 echo "user4:$(openssl passwd -5 -salt saltsha256 xk4T9):1005:1006::/home/user4:/bin/sh" >> hash-sha256.txt
 echo "user5:$(openssl passwd -5 -salt saltsha256 Winter2025):1006:1007::/home/user5:/bin/sh" >> hash-sha256.txt
 ```
-![Result](Screenshots/hash-sha256.png)
+![Result](Screenshots/sha-256.png)
 
 ## Bcrypt
 Check if htpasswd is installed
