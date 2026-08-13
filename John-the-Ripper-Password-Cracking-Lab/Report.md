@@ -52,6 +52,8 @@ echo "user3:$(openssl passwd -1 -salt saltmd5 'Password1!'):1004:1005::/home/use
 echo "user4:$(openssl passwd -1 -salt saltmd5 xk4T9):1005:1006::/home/user4:/bin/sh" >> hash-md5.txt
 echo "user5:$(openssl passwd -1 -salt saltmd5 Winter2025):1006:1007::/home/user5:/bin/sh" >> hash-md5.txt
 ```
+![Result](Screenshots/md5.png)
+
 ## sha-256
 ```bash
 echo "user1:$(openssl passwd -5 -salt saltsha256 user1):1007:1008::/home/user1:/bin/sh" > hash-sha256.txt
@@ -60,6 +62,8 @@ echo "user3:$(openssl passwd -5 -salt saltsha256 'Password1!'):1004:1005::/home/
 echo "user4:$(openssl passwd -5 -salt saltsha256 xk4T9):1005:1006::/home/user4:/bin/sh" >> hash-sha256.txt
 echo "user5:$(openssl passwd -5 -salt saltsha256 Winter2025):1006:1007::/home/user5:/bin/sh" >> hash-sha256.txt
 ```
+![Result](Screenshots/sha256.png)
+
 ## Bcrypt
 Check if htpasswd is installed
 ```
@@ -73,6 +77,7 @@ echo "user3:$(htpasswd -nbB user3 'Password1!' | cut -d: -f2):1004:1005::/home/u
 echo "user4:$(htpasswd -nbB user4 xk4T9 | cut -d: -f2):1005:1006::/home/user4:/bin/sh" >> hash-bcrypt.txt
 echo "user5:$(htpasswd -nbB user5 Winter2025 | cut -d: -f2):1006:1007::/home/user5:/bin/sh" >> hash-bcrypt.txt
 ```
+![Result](Screenshots/htpasswd.png)
 
 ### Step 3:
 Run John the Ripper against all hash types
