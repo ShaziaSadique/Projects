@@ -210,6 +210,7 @@ Result: Session capped at 120 seconds (~53.44 candidates/sec, 160.3 combinations
 timeout 120 john --wordlist=file.txt --mask='?w?d?d?d?d' --format=md5crypt hash-md5.txt
 ```
 ![Result](Screenshots/hybrid_md5.png)
+Result: Session capped at 120 seconds. No new passwords cracked within this window. 2 previously cracked via other modes (`user1`, `password`); the remaining 3 (`Password1!`, `xk4T9`, `Winter2025`) were unreachable in the time given.
 
 **SHA-256**
 ```bash
