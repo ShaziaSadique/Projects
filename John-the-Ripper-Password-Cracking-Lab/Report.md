@@ -171,23 +171,24 @@ Executed John the Ripper using Incremental mode, a brute-force attack that tries
 ```bash
 john --incremental --format=crypt singlecrack_test.txt
 ```
-Result: [paste john output here]
+![Result](Screenshots/incremental_crypt.png)
 
 **MD5**
 ```bash
-john --incremental --format=md5crypt hash-md5.txt
+timeout 120 john --incremental --format=md5crypt hash-md5.txt
 ```
-Result: [paste john output here]
+![Result](Screenshots/incremental_md5.png)
+Result: Session capped at 120 seconds (~138,196 candidates/sec). No new passwords cracked within this window — the 3 remaining passwords (`Password1!`, `xk4T9`, `Winter2025`) are longer/more complex than incremental mode could reach in the time given. 2 of 5 total were previously cracked via other modes (`user1`, `password`).
 
 **SHA-256**
 ```bash
 john --incremental --format=sha256crypt hash-sha256.txt
 ```
-Result: [paste john output here]
+![Result](Screenshots/incremental_256.png)
 
 **Bcrypt**
 ```bash
 john --incremental --format=bcrypt hash-bcrypt.txt
 ```
-Result: [paste john output here]
+![Result](Screenshots/incremental_bcrypt.png)
 
