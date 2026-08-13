@@ -185,6 +185,7 @@ Result: Session capped at 120 seconds (~138,196 candidates/sec). No new password
 john --incremental --format=sha256crypt hash-sha256.txt
 ```
 ![Result](Screenshots/incremental_256.png)
+Result: Session capped at 220 seconds (~6,576 candidates/sec, 5000 iterations). No new passwords cracked within this window. 2 of 5 were previously cracked via other modes (`user1`, `password`); the remaining 3 (`Password1!`, `xk4T9`, `Winter2025`) were unreachable in the time given.
 
 **Bcrypt**
 ```bash
