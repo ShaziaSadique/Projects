@@ -216,9 +216,11 @@ timeout 120 john --wordlist=file.txt --mask='?w?d?d?d?d' --format=md5crypt hash-
 timeout 120 john --wordlist=file.txt --mask='?w?d?d?d?d' --format=sha256crypt hash-sha256.txt
 ```
 ![Result](Screenshots/hybrid_256.png)
+Result: Session capped at 120 seconds (~1,472 candidates/sec, 4,417 combinations/sec). No new passwords cracked within this window. 2 previously cracked via other modes (`user1`, `password`); estimated time to exhaust this mask/wordlist combination exceeded 7 hours.
 
 **Bcrypt**
 ```bash
 timeout 120 john --wordlist=file.txt --mask='?w?d?d?d?d' --format=bcrypt hash-bcrypt.txt
 ```
 ![Result](Screenshots/hybrid_bcrypt.png)
+Result: Session capped at 120 seconds (~1,117 candidates/sec, 3,351 combinations/sec). No new passwords cracked within this window. 2 previously cracked via other modes (`user1`, `password`); estimated time to exhaust this mask/wordlist combination exceeded 11 hours.
