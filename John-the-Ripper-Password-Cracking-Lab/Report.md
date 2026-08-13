@@ -188,7 +188,7 @@ john --incremental --format=sha256crypt hash-sha256.txt
 
 **Bcrypt**
 ```bash
-john --incremental --format=bcrypt hash-bcrypt.txt
+timeout 120 john --incremental --format=bcrypt hash-bcrypt.txt
 ```
 ![Result](Screenshots/incremental_bcrypt.png)
-
+Result: Session capped at 120 seconds (~4,832 candidates/sec, cost factor 32). No new passwords cracked within this window. 2 of 5 were previously cracked via other modes (`user1`, `password`); the remaining 3 (`Password1!`, `xk4T9`, `Winter2025`) were unreachable in the time given.
