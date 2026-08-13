@@ -93,6 +93,7 @@ john --single --format=crypt singlecrack_test.txt
 ![Result](Screenshots/single_crypt.png)
 
 **MD5**
+
 Generated an MD5-crypt hash for each test user's known password using openssl, since Kali's passwd command only produces yescrypt hashes for real system accounts.
 
 ```bash
