@@ -194,3 +194,31 @@ timeout 120 john --incremental --format=bcrypt hash-bcrypt.txt
 ```
 ![Result](Screenshots/incremental_bcrypt.png)
 Result: Session capped at 120 seconds (~4,832 candidates/sec, cost factor 32). No new passwords cracked within this window. 2 of 5 were previously cracked via other modes (`user1`, `password`); the remaining 3 (`Password1!`, `xk4T9`, `Winter2025`) were unreachable in the time given.
+
+## Hybrid/Mask Mode
+Executed John the Ripper using Hybrid/Mask mode, which combines a wordlist with a defined character mask (appending 4 digits to each wordlist entry), targeting passwords that follow a predictable pattern such as "word + year" or "word + number".
+
+**SHA-512crypt / yescrypt**
+```bash
+timeout 120 john --wordlist=file.txt --mask='?w?d?d?d?d' --format=crypt singlecrack_test.txt
+```
+![Result](Screenshots/hybrid_crypt.png)
+Result: Session capped at 120 seconds (~53.44 candidates/sec, 160.3 combinations/sec). No new passwords cracked within this window. 2 previously cracked via other modes (`user1`, `password`).
+
+**MD5**
+```bash
+timeout 120 john --wordlist=file.txt --mask='?w?d?d?d?d' --format=md5crypt hash-md5.txt
+```
+![Result](Screenshots/hybrid_md5.png)
+
+**SHA-256**
+```bash
+timeout 120 john --wordlist=file.txt --mask='?w?d?d?d?d' --format=sha256crypt hash-sha256.txt
+```
+![Result](Screenshots/hybrid_256.png)
+
+**Bcrypt**
+```bash
+timeout 120 john --wordlist=file.txt --mask='?w?d?d?d?d' --format=bcrypt hash-bcrypt.txt
+```
+![Result](Screenshots/hybrid_bcrypt.png)
