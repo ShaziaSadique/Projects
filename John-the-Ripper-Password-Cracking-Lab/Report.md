@@ -52,7 +52,7 @@ echo "user3:$(openssl passwd -1 -salt saltmd5 'Password1!'):1004:1005::/home/use
 echo "user4:$(openssl passwd -1 -salt saltmd5 xk4T9):1005:1006::/home/user4:/bin/sh" >> hash-md5.txt
 echo "user5:$(openssl passwd -1 -salt saltmd5 Winter2025):1006:1007::/home/user5:/bin/sh" >> hash-md5.txt
 ```
-![Result](Screenshots/md5.png)
+![Result](Screenshots/hash-md5.png)
 
 ## sha-256
 ```bash
@@ -62,7 +62,7 @@ echo "user3:$(openssl passwd -5 -salt saltsha256 'Password1!'):1004:1005::/home/
 echo "user4:$(openssl passwd -5 -salt saltsha256 xk4T9):1005:1006::/home/user4:/bin/sh" >> hash-sha256.txt
 echo "user5:$(openssl passwd -5 -salt saltsha256 Winter2025):1006:1007::/home/user5:/bin/sh" >> hash-sha256.txt
 ```
-![Result](Screenshots/sha256.png)
+![Result](Screenshots/hash-sha256.png)
 
 ## Bcrypt
 Check if htpasswd is installed
