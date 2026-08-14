@@ -90,24 +90,29 @@ Executed John the Ripper using this mode, which guesses password based on the us
 john --single --format=crypt singlecrack_test.txt
 ```
 ![Result](Screenshots/single_crypt.png)
+Result: Session completed in 9 seconds (~267.4 candidates/sec). 2 of 5 passwords cracked (`user1`, `password`) — both derived directly from usernames. The remaining 3 passwords were not username-based and therefore outside Single Crack mode's guessing logic.
 
 **MD5**
 ```bash
 john --single --format=md5crypt hash-md5.txt
 ```
 ![Result](Screenshots/single_md5.png)
+Result: Session completed instantly (~16,075 candidates/sec). 2 of 5 passwords cracked (`user1`, `password`) — both derived directly from usernames. The remaining 3 passwords were not username-based and therefore outside Single Crack mode's guessing logic.
 
 **SHA-256**
 ```bash
 john --single --format=sha256crypt hash-sha256.txt
 ```
-![Result](Screenshots/single_256.png)
+![Result](Screenshots/single_sha256.png)
+Result: Session completed instantly (~4,620 candidates/sec). 2 of 5 passwords cracked (`user1`, `password`) — both derived directly from usernames. The remaining 3 passwords were not username-based and therefore outside Single Crack mode's guessing logic.
+
 
 **Bcrypt**
 ```
 john --single --format=bcrypt hash-bcrypt.txt
 ```
 ![Result](Screenshots/single_bcrypt.png)
+Result: Session completed instantly (~4,912 candidates/sec, 1.408 guesses/sec overall). Only 1 of 5 passwords cracked (`user1`), compared to 2/5 for every other hash type tested. John flagged a buffering warning (11 candidates available vs. 12 needed per salt) due to bcrypt's per-hash unique salting, which likely caused the `password` (user2) guess to be skipped in this run despite being username-independent and typically caught by Single Crack mode elsewhere.
 
 ## Wordlist Mode
 Executed John the Ripper using Wordlist mode, which compares each hash against passwords from a precompiled wordlist file, making it effective against passwords that are common words or previously leaked credentials.
