@@ -10,7 +10,7 @@ Shazia Sadique
 09-08-2026
 
 ## Subject
-5 Attack Modes across 5 Hash Types
+5 Attack Modes across 4 Hash Types
 
 ## Overview
 This report documents hands-on password cracking lab using John the Ripper on Kali linux.
@@ -20,7 +20,7 @@ b) Wordlist mode
 c) Rules based mode
 d) Incremental mode
 e) Hybrid/Mask mode
-against five different target hash types
+against four different target hash types
 a) MD5
 b) SHA-256
 c) SHA-512crypt/yescrypt
