@@ -156,12 +156,14 @@ john --wordlist=file.txt --rules --format=crypt singlecrack_test.txt
 john --wordlist=file.txt --rules --format=md5crypt hash-md5.txt
 ```
 ![Result](Screenshots/rules_Md5.png)
+Result: Session completed fully in 1 second (~170,197 candidates/sec, 510,593 combinations/sec). 2 of 5 passwords cracked (`user1`, `password`). The remaining 3 passwords were not found even after exhausting the full wordlist + rule set, indicating they fall outside common word-mutation patterns.
 
 **SHA-256**
 ```bash
 john --wordlist=file.txt --rules --format=sha256crypt hash-sha256.txt
 ```
 ![Result](Screenshots/rules_256.png)
+Result: Session completed fully in 1 second (~5,167 candidates/sec, 15,501 combinations/sec). 2 of 5 passwords cracked (`user1`, `password`). The remaining 3 passwords were not found even after exhausting the full wordlist + rule set.
 
 **Bcrypt**
 ```bash
