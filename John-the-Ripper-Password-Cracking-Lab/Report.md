@@ -121,26 +121,29 @@ Executed John the Ripper using Wordlist mode, which compares each hash against p
 ```bash
 john --wordlist=file.txt --format=crypt singlecrack_test.txt
 ```
-![Result](Screenshots/wordlist_crypt.jpeg)
+![Result](Screenshots/wordlist_crypt.png)
+Result: Session completed fully in 3 minutes 32 seconds (~47.16 candidates/sec, 141.4 combinations/sec). 2 of 5 passwords cracked (`user1`, `password`). The remaining 3 passwords were not present in the wordlist.
 
 **MD5**
 ```bash
 john --wordlist=file.txt --format=md5crypt hash-md5.txt
 ```
-![Result](Screenshots/wordlist_md5.png)
+![Result](Screenshots/wordlist_hashmd5.png)
+Result: Session completed instantly (~124,812 candidates/sec, 374,437 combinations/sec). 2 of 5 passwords cracked (`user1`, `password`). The remaining 3 were not present in the wordlist.
 
 **SHA-256**
 ```bash
 john --wordlist=file.txt --format=sha256crypt hash-sha256.txt
 ```
-![Result](Screenshots/wordlist_256.png)
+![Result](Screenshots/wordlist_sha256crypt.png)
+Result: Session completed in 1 second (~7,462 candidates/sec, 22,388 combinations/sec). 2 of 5 passwords cracked (`user1`, `password`).
 
 **Bcrypt**
 ```bash
 john --wordlist=file.txt --format=bcrypt hash-bcrypt.txt
 ```
-![Result](Screenshots/wordlist_bcrypt.png)
-
+![Result](Screenshots/wordlist_bbcrypt.png)
+Result: Completed in 5 seconds (~1,893 candidates/sec, 5,688 combinations/sec). 2 of 5 passwords cracked (`user1`, `password`) — notably, `password` was cracked by Wordlist mode despite being missed earlier under Single Crack mode's salt-buffering limitation.
 
 ## Rules-Based Mode
 Executed John the Ripper using Rules-Based mode, which applies transformation rules (such as adding numbers, capitalizing letters, or appending symbols) to wordlist entries, allowing it to crack passwords that are slight variations of common words.
