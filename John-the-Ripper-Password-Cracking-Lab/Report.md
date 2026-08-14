@@ -86,23 +86,18 @@ Run John the Ripper against all hash types
 Executed John the Ripper using this mode, which guesses password based on the username and GECOS field data.
 
 **SHA-512crypt / yescrypt**
-Perform password cracking
 ```bash
 john --single --format=crypt singlecrack_test.txt
 ```
 ![Result](Screenshots/single_crypt.png)
 
 **MD5**
-
-Generated an MD5-crypt hash for each test user's known password using openssl, since Kali's passwd command only produces yescrypt hashes for real system accounts.
-
 ```bash
 john --single --format=md5crypt hash-md5.txt
 ```
 ![Result](Screenshots/single_md5.png)
 
 **SHA-256**
-
 ```bash
 john --single --format=sha256crypt hash-sha256.txt
 ```
