@@ -5,6 +5,6 @@ Hands-on lab testing 5 JtR attack modes (Single Crack, Wordlist, Rules-Based, In
 
 **Tools:** Kali Linux, John the Ripper, openssl, htpasswd
 
-[View Repo →](https://github.com/ShaziaSadique/John-the-Ripper-Cracking-Lab)
+[View Repo →](https://github.com/ShaziaSadique/Projects/John-the-Ripper-Cracking-Lab)
 
 
