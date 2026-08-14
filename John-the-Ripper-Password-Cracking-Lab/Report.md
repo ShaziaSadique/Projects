@@ -153,6 +153,7 @@ Executed John the Ripper using Rules-Based mode, which applies transformation ru
 john --wordlist=file.txt --rules --format=crypt singlecrack_test.txt
 ```
 ![Result](Screenshots/rules_crypt.png)
+Result: Session capped at 120 seconds (0.93% complete, ~43.06 candidates/sec, 129.9 combinations/sec). No new passwords cracked within this window. 2 previously cracked via other modes (`user1`, `password`).
 
 **MD5**
 ```bash
@@ -170,9 +171,10 @@ Result: Session completed fully in 1 second (~5,167 candidates/sec, 15,501 combi
 
 **Bcrypt**
 ```bash
-john --wordlist=file.txt --rules --format=bcrypt hash-bcrypt.txt
+timeout 120 john --wordlist=file.txt --rules --format=bcrypt hash-bcrypt.txt
 ```
 ![Result](Screenshots/rules_bcrypt.png)
+Result: Session capped at 120 seconds (50.53% complete, ~1,373 candidates/sec, 4,119 combinations/sec). No new passwords cracked within this window. 2 previously cracked via other modes (`user1`, `password`).
 
 
 ## Incremental Mode
